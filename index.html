@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portal do Aprendiz · CSC Frísia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Cores do Manual de Identidade Visual Frísia (2021): azul #003475 e #2581c4, verde #b1c800, azul claro #85cee4 */
+:root{--bg:#f1f5f9;--surface:#fff;--ink:#14233a;--muted:#546579;--line:#d3dce6;--brand:#003475;--brand-soft:#e1ecf7;--on-brand:#fff;--lime:#b1c800;--ok:#2581c4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1626;--surface:#112238;--ink:#eaf1f8;--muted:#9fb3c8;--line:#233a55;--brand:#85cee4;--brand-soft:#16304e;--on-brand:#06223f;--ok:#85cee4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1626;--surface:#112238;--ink:#eaf1f8;--muted:#9fb3c8;--line:#233a55;--brand:#85cee4;--brand-soft:#16304e;--on-brand:#06223f;--ok:#85cee4;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{background:#003475;color:#fff;border-bottom:6px solid var(--lime)}
+header .wrap{padding-top:26px;padding-bottom:24px}
+.brand{font:700 18px Montserrat,system-ui,sans-serif;letter-spacing:.04em;margin-bottom:10px}
+.brand b{color:var(--lime)}
+h1{font:700 clamp(28px,5.5vw,42px)/1.1 Montserrat,system-ui,sans-serif;margin:0 0 8px}
+header p{margin:0;max-width:58ch;color:#d6e6f5}
+.prog{margin-top:18px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px}
+.bar{flex:1;max-width:320px;height:10px;background:rgba(255,255,255,.28);border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--lime);transition:width .3s}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px;align-items:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+button,input{font:inherit;color:inherit}
+.tab{border:1.5px solid var(--line);background:var(--surface);padding:7px 16px;border-radius:6px;cursor:pointer;font-weight:600}
+.tab[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+input[type=search]{flex:1;min-width:180px;padding:8px 12px;border:1.5px solid var(--line);border-radius:6px;background:var(--surface)}
+:focus-visible{outline:3px solid var(--ok);outline-offset:2px}
+.cats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.chip{border:0;background:transparent;color:var(--brand);cursor:pointer;padding:2px 0;font-weight:600;border-bottom:3px solid transparent}
+.chip[aria-pressed="true"]{border-bottom-color:var(--lime)}
+.list{display:grid;gap:12px;padding-bottom:48px}
+.item{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--brand);border-radius:6px}
+.item.it{border-left-color:var(--lime)}
+.item.done{opacity:.72}
+.row{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;flex-wrap:wrap}
+.main{flex:1;min-width:220px}
+.kind{display:inline-block;font-weight:700;font-size:13px;padding:1px 8px;border-radius:4px;background:var(--brand);color:var(--on-brand);margin-right:8px}
+.it .kind{background:var(--lime);color:#1d2600}
+.meta{color:var(--muted);font-size:14px}
+h2{font:600 19px/1.25 Montserrat,system-ui,sans-serif;margin:6px 0 4px}
+.act{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{border:1.5px solid var(--brand);background:var(--brand);color:var(--on-brand);padding:7px 14px;border-radius:6px;cursor:pointer;font-weight:600;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.chk{display:flex;gap:6px;align-items:center;font-size:14px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--ok)}
+.detail{border-top:1px dashed var(--line);padding:14px 16px 16px;display:none}
+.item.open .detail{display:block}
+.detail h3{font:600 15px Montserrat,system-ui,sans-serif;margin:12px 0 4px}
+.detail h3:first-child{margin-top:0}
+.detail ol,.detail ul{margin:0;padding-left:22px}
+.detail li{margin:3px 0}
+.alert{background:color-mix(in srgb,var(--lime) 22%,transparent);border-left:4px solid var(--lime);padding:8px 12px;border-radius:4px}
+.empty{padding:32px;text-align:center;color:var(--muted)}
+footer{padding:0 20px 28px;text-align:center;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:6px;flex-wrap:wrap;padding-top:18px}
+.nav button{border:0;background:transparent;font-weight:600;padding:8px 14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.nav button[aria-current="true"]{color:var(--brand);border-bottom-color:var(--lime)}
+.ev{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--lime);border-radius:6px;padding:12px 16px}
+.ev .d{min-width:56px;text-align:center;font-weight:700;font-size:22px;color:var(--brand);line-height:1.1}
+.ev .d small{display:block;font-size:13px;font-weight:500;color:var(--muted)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:6px}
+summary{cursor:pointer;padding:12px 16px;font-weight:600}
+details p{margin:0;padding:0 16px 14px;color:var(--muted)}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand">FRÍSIA <b>·</b> CSC</div>
+<h1>Portal do Aprendiz</h1>
+<p>Vídeos e instruções de trabalho (ITs) da Central de Serviços Compartilhados. Assista, leia e marque o que já concluiu.</p>
+<div class="prog"><span id="ptxt">0 de 0 concluídos</span><div class="bar" role="progressbar" aria-label="Progresso"><i id="pbar"></i></div></div>
+</div></header>
+
+<main class="wrap">
+<nav class="nav" id="nav" aria-label="Seções">
+<button data-s="trein" aria-current="true">Treinamentos</button>
+<button data-s="eventos" aria-current="false">Eventos</button>
+<button data-s="faq" aria-current="false">Dúvidas frequentes</button>
+</nav>
+<section id="s-trein">
+<div class="tools">
+<div class="tabs" id="tabs">
+<button class="tab" data-k="all" aria-pressed="true">Tudo</button>
+<button class="tab" data-k="video" aria-pressed="false">Vídeos</button>
+<button class="tab" data-k="it" aria-pressed="false">ITs</button>
+</div>
+<input type="search" id="q" placeholder="Buscar por título ou palavra" aria-label="Buscar">
+</div>
+<div class="cats" id="cats"></div>
+<div class="list" id="list"></div>
+</section>
+<section id="s-eventos" hidden style="padding-top:20px"></section>
+<section id="s-faq" hidden style="padding:20px 0 48px"></section>
+</main>
+<footer>Seu progresso fica salvo neste navegador.<br>Apoio ao Aprendiz | Frísia Cooperativa Agroindustrial</footer>
+
+<script>
+/* ===== EDITE AQUI: conteúdo do portal (exemplos) =====
+   Vídeos: preencha "url" com o link. ITs: edite código, passos e cuidados. */
+var ITENS = [
+ {id:"v1",tipo:"video",cat:"Integração",titulo:"Boas-vindas ao CSC",desc:"Conheça a equipe, as áreas atendidas e como o CSC trabalha.",dur:"6 min",url:""},
+ {id:"v2",tipo:"video",cat:"Sistemas",titulo:"Primeiros passos no sistema",desc:"Acesso, navegação e consultas básicas.",dur:"10 min",url:""},
+ {id:"v3",tipo:"video",cat:"Atendimento",titulo:"Como atender chamados internos",desc:"Prioridade, prazos e comunicação com o solicitante.",dur:"8 min",url:""},
+ {id:"v4",tipo:"video",cat:"Conformidade",titulo:"Segurança da informação e LGPD",desc:"Cuidados com dados, senhas e documentos.",dur:"7 min",url:""},
+ {id:"it1",tipo:"it",cat:"Financeiro",codigo:"IT-001",titulo:"Lançamento de nota fiscal",rev:"Rev. 01",
+  objetivo:"Lançar notas fiscais no sistema com os dados corretos e dentro do prazo.",
+  previo:["Acesso ao sistema liberado","Nota fiscal e pedido de compra em mãos"],
+  passos:["Confira se a nota está legível e completa.","Localize o pedido ou a solicitação relacionada.","Confira fornecedor, CNPJ, valores e impostos.","Registre a nota no sistema.","Anexe o documento e salve o lançamento.","Informe o solicitante se houver divergência."],
+  cuidados:"Nunca lance nota com divergência de valor ou fornecedor sem avisar o líder."},
+ {id:"it2",tipo:"it",cat:"Atendimento",codigo:"IT-002",titulo:"Registro e resposta de chamados",rev:"Rev. 01",
+  objetivo:"Garantir que todo chamado seja registrado, tratado e respondido com clareza.",
+  previo:["Acesso à ferramenta de chamados","Lista de prazos por tipo de solicitação"],
+  passos:["Abra o chamado e leia o pedido por completo.","Classifique o tipo e a prioridade.","Peça informações faltantes ao solicitante.","Execute a atividade conforme a IT da área.","Responda com o que foi feito e encerre o chamado."],
+  cuidados:"Não encerre o chamado sem confirmar que o pedido foi totalmente atendido."},
+ {id:"it3",tipo:"it",cat:"Conformidade",codigo:"IT-003",titulo:"Arquivo e guarda de documentos",rev:"Rev. 02",
+  objetivo:"Manter documentos organizados e fáceis de encontrar.",
+  previo:["Acesso à pasta de rede do setor"],
+  passos:["Nomeie o arquivo conforme o padrão do setor.","Salve na pasta correta, por área e período.","Confirme que o documento abre corretamente.","Guarde originais físicos no local indicado."],
+  cuidados:"Documentos com dados pessoais ou financeiros só podem ficar em pastas com acesso restrito."}
+];
+/* Eventos (exemplos): data no formato AAAA-MM-DD. Eventos passados somem sozinhos. */
+var EVENTOS=[
+ {data:"2026-11-09",titulo:"Integração de novos aprendizes",hora:"09h",local:"Sala de treinamento"},
+ {data:"2026-11-17",titulo:"Treinamento: segurança da informação",hora:"14h",local:"Online"},
+ {data:"2026-11-27",titulo:"Reunião mensal do CSC",hora:"10h",local:""}
+];
+/* Dúvidas frequentes (exemplos) */
+var FAQ=[
+ {p:"A quem devo pedir ajuda quando tiver dúvida?",r:"Fale primeiro com seu tutor. Se ele não estiver, procure seu líder."},
+ {p:"Onde encontro as instruções de trabalho?",r:"Na aba Treinamentos, filtrando por ITs. Cada IT abre na própria página."},
+ {p:"Como sei quais vídeos já assisti?",r:"Marque \"Concluído\" em cada item. O progresso fica salvo neste navegador."},
+ {p:"Posso executar uma atividade sem ter lido a IT?",r:"Não. Leia a IT e, em caso de dúvida, confirme com seu tutor antes de começar."}
+];
+/* ===== fim da área de edição ===== */
+
+var st={k:"all",cat:"Todas",q:""},done={};
+try{done=JSON.parse(localStorage.getItem("aprendiz_done")||"{}")}catch(e){done={}}
+function save(){try{localStorage.setItem("aprendiz_done",JSON.stringify(done))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function cats(){
+ var c=["Todas"];ITENS.forEach(function(i){if(c.indexOf(i.cat)<0)c.push(i.cat)});
+ document.getElementById("cats").innerHTML=c.map(function(x){return '<button class="chip" data-c="'+esc(x)+'" aria-pressed="'+(x===st.cat)+'">'+esc(x)+'</button>'}).join("");
+}
+function prog(){
+ var n=ITENS.filter(function(i){return done[i.id]}).length;
+ document.getElementById("ptxt").textContent=n+" de "+ITENS.length+" concluídos";
+ document.getElementById("pbar").style.width=(ITENS.length?n/ITENS.length*100:0)+"%";
+}
+function li(a){return a.map(function(e){return"<li>"+esc(e)+"</li>"}).join("")}
+function card(i){
+ var isIt=i.tipo==="it",open=st.open===i.id;
+ var h='<article class="item '+(isIt?"it":"")+(done[i.id]?" done":"")+(open?" open":"")+'" data-id="'+i.id+'"><div class="row"><div class="main">'
+  +'<span class="kind">'+(isIt?"IT":"Vídeo")+'</span><span class="meta">'+esc(i.cat)+" · "+esc(isIt?i.rev:i.dur)+'</span>'
+  +'<h2>'+esc(isIt?i.codigo+" · "+i.titulo:i.titulo)+'</h2><div class="meta">'+esc(isIt?i.objetivo:i.desc)+'</div></div><div class="act">';
+ if(isIt)h+='<button class="btn ghost" data-a="toggle" aria-expanded="'+open+'">'+(open?"Fechar IT":"Ler IT")+'</button>';
+ else h+=i.url?'<a class="btn" href="'+esc(i.url)+'" target="_blank" rel="noopener">Assistir</a>':'<span class="btn" aria-disabled="true">Link em breve</span>';
+ h+='<label class="chk"><input type="checkbox" data-a="done"'+(done[i.id]?" checked":"")+'> Concluído</label></div></div>';
+ if(isIt)h+='<div class="detail"><h3>Antes de começar</h3><ul>'+li(i.previo)+'</ul><h3>Passo a passo</h3><ol>'+li(i.passos)+'</ol><h3>Atenção</h3><div class="alert">'+esc(i.cuidados)+'</div></div>';
+ return h+'</article>';
+}
+function render(){
+ var q=st.q.toLowerCase();
+ var l=ITENS.filter(function(i){
+  return (st.k==="all"||i.tipo===st.k)&&(st.cat==="Todas"||i.cat===st.cat)&&(!q||(i.titulo+" "+(i.codigo||"")+" "+(i.desc||i.objetivo)).toLowerCase().indexOf(q)>=0);
+ });
+ document.getElementById("list").innerHTML=l.length?l.map(card).join(""):'<div class="empty">Nada encontrado. Limpe a busca ou escolha outra categoria.</div>';
+ prog();
+}
+document.getElementById("tabs").addEventListener("click",function(e){
+ var b=e.target.closest("[data-k]");if(!b)return;st.k=b.dataset.k;
+ document.querySelectorAll(".tab").forEach(function(t){t.setAttribute("aria-pressed",t===b)});render();
+});
+document.getElementById("cats").addEventListener("click",function(e){
+ var b=e.target.closest("[data-c]");if(!b)return;st.cat=b.dataset.c;cats();render();
+});
+document.getElementById("q").addEventListener("input",function(e){st.q=e.target.value;render()});
+document.getElementById("list").addEventListener("click",function(e){
+ var el=e.target.closest("[data-a]");if(!el)return;
+ var id=el.closest(".item").dataset.id;
+ if(el.dataset.a==="toggle"){st.open=st.open===id?null:id;render()}
+ else if(el.dataset.a==="done"){if(el.checked)done[id]=1;else delete done[id];save();render()}
+});
+var MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+var hoje=new Date();hoje.setHours(0,0,0,0);
+var ev=EVENTOS.map(function(x){return{d:new Date(x.data+"T12:00:00"),t:x.titulo,h:x.hora,l:x.local}}).filter(function(x){return x.d>=hoje}).sort(function(a,b){return a.d-b.d});
+document.getElementById("s-eventos").innerHTML='<div class="list">'+(ev.length?ev.map(function(x){return '<div class="ev"><div class="d">'+x.d.getDate()+'<small>'+MES[x.d.getMonth()]+'</small></div><div><b>'+esc(x.t)+'</b><div class="meta">'+esc(x.h)+(x.l?' · '+esc(x.l):'')+'</div></div></div>'}).join(''):'<div class="empty">Nenhum evento marcado por enquanto.</div>')+'</div>';
+document.getElementById("s-faq").innerHTML='<div class="list">'+FAQ.map(function(q){return '<details><summary>'+esc(q.p)+'</summary><p>'+esc(q.r)+'</p></details>'}).join('')+'</div>';
+document.getElementById("nav").addEventListener("click",function(e){
+ var b=e.target.closest("[data-s]");if(!b)return;
+ ["trein","eventos","faq"].forEach(function(k){document.getElementById("s-"+k).hidden=(k!==b.dataset.s)});
+ document.querySelectorAll("#nav button").forEach(function(x){x.setAttribute("aria-current",x===b)});
+});
+cats();render();
+</script>
+</body>
+</html>
