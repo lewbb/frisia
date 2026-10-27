@@ -69,6 +69,9 @@ details{background:var(--surface);border:1px solid var(--line);border-radius:6px
 summary{cursor:pointer;padding:12px 16px;font-weight:600}
 details p{margin:0;padding:0 16px 14px;color:var(--muted)}
 [hidden]{display:none!important}
+.detail p{margin:6px 0}
+.chkl{display:grid;gap:8px;margin:6px 0}
+.chkl .chk{align-items:flex-start;font-size:16px}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style>
 </head>
@@ -107,25 +110,22 @@ details p{margin:0;padding:0 16px 14px;color:var(--muted)}
 /* ===== EDITE AQUI: conteúdo do portal (exemplos) =====
    Vídeos: preencha "url" com o link. ITs: edite código, passos e cuidados. */
 var ITENS = [
- {id:"v1",tipo:"video",cat:"Integração",titulo:"Boas-vindas ao CSC",desc:"Conheça a equipe, as áreas atendidas e como o CSC trabalha.",dur:"6 min",url:""},
- {id:"v2",tipo:"video",cat:"Sistemas",titulo:"Primeiros passos no sistema",desc:"Acesso, navegação e consultas básicas.",dur:"10 min",url:""},
- {id:"v3",tipo:"video",cat:"Atendimento",titulo:"Como atender chamados internos",desc:"Prioridade, prazos e comunicação com o solicitante.",dur:"8 min",url:""},
- {id:"v4",tipo:"video",cat:"Conformidade",titulo:"Segurança da informação e LGPD",desc:"Cuidados com dados, senhas e documentos.",dur:"7 min",url:""},
- {id:"it1",tipo:"it",cat:"Financeiro",codigo:"IT-001",titulo:"Lançamento de nota fiscal",rev:"Rev. 01",
-  objetivo:"Lançar notas fiscais no sistema com os dados corretos e dentro do prazo.",
-  previo:["Acesso ao sistema liberado","Nota fiscal e pedido de compra em mãos"],
-  passos:["Confira se a nota está legível e completa.","Localize o pedido ou a solicitação relacionada.","Confira fornecedor, CNPJ, valores e impostos.","Registre a nota no sistema.","Anexe o documento e salve o lançamento.","Informe o solicitante se houver divergência."],
-  cuidados:"Nunca lance nota com divergência de valor ou fornecedor sem avisar o líder."},
- {id:"it2",tipo:"it",cat:"Atendimento",codigo:"IT-002",titulo:"Registro e resposta de chamados",rev:"Rev. 01",
-  objetivo:"Garantir que todo chamado seja registrado, tratado e respondido com clareza.",
-  previo:["Acesso à ferramenta de chamados","Lista de prazos por tipo de solicitação"],
-  passos:["Abra o chamado e leia o pedido por completo.","Classifique o tipo e a prioridade.","Peça informações faltantes ao solicitante.","Execute a atividade conforme a IT da área.","Responda com o que foi feito e encerre o chamado."],
-  cuidados:"Não encerre o chamado sem confirmar que o pedido foi totalmente atendido."},
- {id:"it3",tipo:"it",cat:"Conformidade",codigo:"IT-003",titulo:"Arquivo e guarda de documentos",rev:"Rev. 02",
-  objetivo:"Manter documentos organizados e fáceis de encontrar.",
-  previo:["Acesso à pasta de rede do setor"],
-  passos:["Nomeie o arquivo conforme o padrão do setor.","Salve na pasta correta, por área e período.","Confirme que o documento abre corretamente.","Guarde originais físicos no local indicado."],
-  cuidados:"Documentos com dados pessoais ou financeiros só podem ficar em pastas com acesso restrito."}
+ {id:"it1",tipo:"it",cat:"Fiscal",titulo:"Lançamento de notas — Frísia Facilita",rev:"Diariamente · Frísia Facilita e EBS",
+  objetivo:"Conferir e encaminhar notas fiscais de remessa ou locação para lançamento no setor Fiscal, garantindo que os dados da nota estejam de acordo com a respectiva ordem de compra (OC).",
+  secoes:[
+  {t:"Como iniciar a atividade",ol:["Acesse o Frísia Facilita.","Localize os protocolos do tipo CEN003, que identificam as solicitações tratadas neste processo.","Localize o protocolo referente à nota fiscal que será conferida.","Identifique o número da nota fiscal e a ordem de compra informados no protocolo."],al:"CEN003 é o tipo de protocolo no Frísia Facilita. O caminho exato do filtro para encontrá-los ainda será confirmado."},
+  {t:"Etapa 1 — Conferência da nota fiscal",ol:["Identifique o número da nota fiscal informado no protocolo.","Confira se esse número corresponde ao da nota fiscal.","Abra a nota fiscal no sistema correspondente e consulte as informações.","Use os dados da nota como referência para a conferência com a ordem de compra."]},
+  {t:"Etapa 2 — Conferência da ordem de compra",p:"Acesse a ordem de compra no sistema correspondente, compare com os dados da nota e verifique:",ul:[["CNPJ do fornecedor","confirme se está correto e é o fornecedor da nota"],["Código de serviço","deve corresponder ao informado na OC"],["Organização","a OC deve pertencer à organização correta"],["Valores","devem estar de acordo com a OC"],["Saldo disponível","deve ser suficiente para o lançamento"],["Situação da OC","deve estar aberta"]],al:"Se a OC estiver fechada ou sem saldo suficiente, não abra o protocolo para lançamento no Fiscal. Avise o responsável pelo processo para receber as orientações.",p2:"Não prossiga enquanto houver divergências que impeçam a continuidade do procedimento."},
+  {t:"Etapa 3 — Abertura do protocolo para lançamento no Fiscal",p:"Com nota e OC conferidas, e a OC aberta e com saldo, acesse o Frísia Facilita e abra o protocolo de lançamento no setor Fiscal. Preencha todos os campos com as informações conferidas:",ul:["Valor total da nota fiscal","CNPJ do fornecedor","CNPJ da Frísia","Valor total da ordem de compra","Saldo disponível na ordem de compra","Situação da ordem de compra","Data de vencimento da nota fiscal","Número da ordem de compra","Organização da ordem de compra"],p2:"Confira atentamente cada campo antes de prosseguir."},
+  {t:"Etapa 4 — Salvar e encaminhar o protocolo",ol:["Revise todas as informações preenchidas.","Confirme se os dados correspondem à nota fiscal e à ordem de compra.","Salve o protocolo.","Encaminhe-o ao setor Fiscal, conforme o fluxo do Frísia Facilita."],p2:"Encaminhe somente depois de conferir as informações."},
+  {t:"Cuidados importantes",ul:["Confira se o número da nota informado no protocolo é o mesmo da nota.","Verifique se a ordem de compra corresponde à nota fiscal.","Confirme o CNPJ do fornecedor e o CNPJ da Frísia.","Verifique se o código de serviço está correto.","Confirme se a OC pertence à organização indicada.","Confira os valores e o saldo disponível.","Verifique se a OC está aberta.","Confira a data de vencimento da nota fiscal.","Não abra o protocolo de lançamento se a OC estiver fechada ou sem saldo suficiente.","Não encaminhe protocolos com informações divergentes ou não verificadas."],p2:"A conferência correta evita devoluções, retrabalho e atrasos no lançamento fiscal."},
+  {t:"Divergências possíveis",ul:["Número da nota fiscal incorreto no protocolo","Ordem de compra incompatível com a nota","Código de serviço divergente","CNPJ ou organização incorretos","Valor ou saldo incompatível com o lançamento"]},
+  {t:"Divergência identificada antes do encaminhamento",p:"Não prossiga como se as informações estivessem corretas. Procure o responsável pelo processo para receber orientação sobre a regularização.",p2:"Se a OC estiver fechada ou sem saldo suficiente, não abra o protocolo e avise o responsável."},
+  {t:"Quando o Fiscal devolver o protocolo",ol:["Leia o retorno do Fiscal e identifique o problema apontado.","Confira novamente as informações da nota fiscal e da ordem de compra.","Se o problema estiver na OC, como o código de serviço, peça ao responsável pela OC que providencie o ajuste.","Aguarde a aprovação da OC ajustada.","Com a OC aprovada, devolva o protocolo ao Fiscal, seguindo o fluxo do Frísia Facilita."],al:"Não considere uma alteração concluída antes da aprovação da OC, quando essa aprovação for necessária para a regularização.",p2:"Se não souber como tratar a divergência ou qual é a correção necessária, procure um dos responsáveis pelo apoio antes de prosseguir."},
+  {t:"Responsáveis pelo apoio",p:"Em caso de dúvidas sobre a conferência da nota, da OC ou das divergências, procure:",ul:["Letícia (Baby)","Raphael","Yasmin"],p2:"Procure apoio também quando algo impedir a continuidade do processo ou quando não estiver claro como regularizar uma divergência."},
+  {t:"Checklist de conferência",p:"Antes de encaminhar o protocolo ao Fiscal, confirme:",chk:["Localizei o protocolo do tipo CEN003 no Frísia Facilita.","Conferi o número da nota fiscal.","Abri e conferi a nota fiscal.","Conferi a ordem de compra no sistema correspondente.","Verifiquei o CNPJ do fornecedor.","Verifiquei o CNPJ da Frísia.","Conferi o código de serviço.","Confirmei a organização da ordem de compra.","Conferi o valor total da nota fiscal.","Conferi o valor total e o saldo da ordem de compra.","Confirmei que a ordem de compra está aberta.","Verifiquei a data de vencimento da nota fiscal.","Preenchi todos os campos solicitados no protocolo.","Revisei os dados antes de salvar.","Salvei e encaminhei o protocolo ao setor Fiscal."],al:"Se a OC estiver fechada, sem saldo suficiente ou com divergência que impeça o lançamento, interrompa o procedimento e avise o responsável."},
+  {t:"Informações em validação",p:"Ainda serão confirmados:",ol:["Em qual sistema a nota fiscal e a ordem de compra são consultadas em cada etapa.","O caminho exato no Frísia Facilita para localizar os protocolos CEN003.","O caminho e o nome da opção para abrir o protocolo de lançamento no Fiscal.","Os nomes exatos dos campos do formulário.","O comando ou opção para devolver o protocolo ao Fiscal após a aprovação da OC."],p2:"Esses detalhes poderão ser acrescentados depois com capturas de tela ou vídeo demonstrativo."}
+  ]}
 ];
 /* Eventos (exemplos): data no formato AAAA-MM-DD. Eventos passados somem sozinhos. */
 var EVENTOS=[
@@ -135,9 +135,9 @@ var EVENTOS=[
 ];
 /* Dúvidas frequentes (exemplos) */
 var FAQ=[
- {p:"A quem devo pedir ajuda quando tiver dúvida?",r:"Fale primeiro com seu tutor. Se ele não estiver, procure seu líder."},
- {p:"Onde encontro as instruções de trabalho?",r:"Na aba Treinamentos, filtrando por ITs. Cada IT abre na própria página."},
- {p:"Como sei quais vídeos já assisti?",r:"Marque \"Concluído\" em cada item. O progresso fica salvo neste navegador."},
+ {p:"A quem devo pedir ajuda quando tiver dúvida?",r:"Procure Letícia (Baby), Raphael ou Yasmin. Eles são os responsáveis pelo apoio."},
+ {p:"Onde encontro as instruções de trabalho?",r:"Na aba Treinamentos. Clique em Ler IT para abrir o passo a passo."},
+ {p:"Como acompanho o que já concluí?",r:"Marque \"Concluído\" em cada item. O progresso fica salvo neste navegador."},
  {p:"Posso executar uma atividade sem ter lido a IT?",r:"Não. Leia a IT e, em caso de dúvida, confirme com seu tutor antes de começar."}
 ];
 /* ===== fim da área de edição ===== */
@@ -160,12 +160,24 @@ function card(i){
  var isIt=i.tipo==="it",open=st.open===i.id;
  var h='<article class="item '+(isIt?"it":"")+(done[i.id]?" done":"")+(open?" open":"")+'" data-id="'+i.id+'"><div class="row"><div class="main">'
   +'<span class="kind">'+(isIt?"IT":"Vídeo")+'</span><span class="meta">'+esc(i.cat)+" · "+esc(isIt?i.rev:i.dur)+'</span>'
-  +'<h2>'+esc(isIt?i.codigo+" · "+i.titulo:i.titulo)+'</h2><div class="meta">'+esc(isIt?i.objetivo:i.desc)+'</div></div><div class="act">';
+  +'<h2>'+esc(isIt&&i.codigo?i.codigo+" · "+i.titulo:i.titulo)+'</h2><div class="meta">'+esc(isIt?i.objetivo:i.desc)+'</div></div><div class="act">';
  if(isIt)h+='<button class="btn ghost" data-a="toggle" aria-expanded="'+open+'">'+(open?"Fechar IT":"Ler IT")+'</button>';
  else h+=i.url?'<a class="btn" href="'+esc(i.url)+'" target="_blank" rel="noopener">Assistir</a>':'<span class="btn" aria-disabled="true">Link em breve</span>';
  h+='<label class="chk"><input type="checkbox" data-a="done"'+(done[i.id]?" checked":"")+'> Concluído</label></div></div>';
- if(isIt)h+='<div class="detail"><h3>Antes de começar</h3><ul>'+li(i.previo)+'</ul><h3>Passo a passo</h3><ol>'+li(i.passos)+'</ol><h3>Atenção</h3><div class="alert">'+esc(i.cuidados)+'</div></div>';
+ if(isIt)h+=det(i);
  return h+'</article>';
+}
+function det(i){
+ var h='<div class="detail">';
+ i.secoes.forEach(function(x){
+  h+='<h3>'+esc(x.t)+'</h3>';
+  if(x.p)h+='<p>'+esc(x.p)+'</p>';
+  ["ol","ul"].forEach(function(k){if(x[k])h+='<'+k+'>'+x[k].map(function(y){return '<li>'+(Array.isArray(y)?'<b>'+esc(y[0])+':</b> '+esc(y[1]):esc(y))+'</li>'}).join('')+'</'+k+'>'});
+  if(x.chk)h+='<div class="chkl">'+x.chk.map(function(y,n){var k=i.id+"_"+n;return '<label class="chk"><input type="checkbox" data-a="c" data-k="'+k+'"'+(done[k]?' checked':'')+'> '+esc(y)+'</label>'}).join('')+'</div>';
+  if(x.al)h+='<div class="alert">'+esc(x.al)+'</div>';
+  if(x.p2)h+='<p>'+esc(x.p2)+'</p>';
+ });
+ return h+'</div>';
 }
 function render(){
  var q=st.q.toLowerCase();
@@ -187,6 +199,7 @@ document.getElementById("list").addEventListener("click",function(e){
  var el=e.target.closest("[data-a]");if(!el)return;
  var id=el.closest(".item").dataset.id;
  if(el.dataset.a==="toggle"){st.open=st.open===id?null:id;render()}
+ else if(el.dataset.a==="c"){if(el.checked)done[el.dataset.k]=1;else delete done[el.dataset.k];save()}
  else if(el.dataset.a==="done"){if(el.checked)done[id]=1;else delete done[id];save();render()}
 });
 var MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
@@ -199,6 +212,8 @@ document.getElementById("nav").addEventListener("click",function(e){
  ["trein","eventos","faq"].forEach(function(k){document.getElementById("s-"+k).hidden=(k!==b.dataset.s)});
  document.querySelectorAll("#nav button").forEach(function(x){x.setAttribute("aria-current",x===b)});
 });
+if(ITENS.length<4){document.querySelector('.tools').hidden=true;document.getElementById('cats').hidden=true}
+if(ITENS.length===1)st.open=ITENS[0].id;
 cats();render();
 </script>
 </body>
